@@ -16,6 +16,8 @@ public class Client {
  private OutputStream outMessage ;
  private OutputStreamWriter osw;
  private BufferedWriter bw;
+private long end_time;
+private long start_time;
 
 private void sender(InetAddress ip,int id){
 	try{
@@ -35,9 +37,21 @@ private void sender(InetAddress ip,int id){
 	
 }
  
+
  
  Client(InetAddress ip,int id) {
+	  start_time = System.nanoTime();
 	  sender(ip,id);
-     
-}
+	  
+	  end_time = System.nanoTime();
+	  long sumRTT=0, averageRTT=0;
+	  int count=0;
+	  count++;
+	  
+	  System.out.println("RTT: " +(end_time-start_time));
+	  sumRTT= sumRTT +(end_time-start_time);
+	  averageRTT=sumRTT/count;
+	  
+	  System.out.println("averageRTT: "+averageRTT);
+ }
 }
